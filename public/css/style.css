@@ -1,0 +1,250 @@
+﻿body {
+	padding-top: 50px;
+	background-image: url(/img/background1.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	font-family: 'Roboto Slab', serif;
+	height: 100%;
+}
+
+/*navbar*/
+.hover {
+	font-size: 15px;
+	padding: 0 10px;
+	margin: 0 10px;
+}
+
+.navbar navbar-default navbar-fixed-top{
+	margin-bottom: 0px;
+}
+
+/*login.php*/
+.loginfeld {
+	float: left;
+	margin: 180px 0 0 0;
+}
+
+.jumbotron {
+	background: rgba(248, 248, 248, .5);
+	padding: 25px 60px;
+}
+
+.slogan {
+	margin: 190px 0 0 750px;
+	font-family: 'Droid Sans', sans-serif;
+	font-size: 35px;
+}
+
+/*register.php*/
+.register {
+	float: left;
+	margin: 180px 0 0 0;
+}
+/*Hier würde auch .jumbotron von
+login.php dazugehören*/
+
+/*history.php*/
+.logo-gross {
+	margin: 40px 0 0 400px;
+}
+
+/*.container-usual gehöhrt zu
+search.php, profile.php, impressum.php, myFiles.php, upload.php*/
+#container-usual {
+	padding: 50px 40px 70px 100px;
+	background-color: #FFFEEC;
+	min-height: calc(100vh - 50px);
+} /*search.php*/
+.search {
+	margin: 50px 0 100px 350px;
+}
+
+.navbar-form navbar-left {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.beschrieb {
+	margin: 0 0 100px 0;
+}
+
+.titel {
+	text-align: center;
+}
+
+/*profile.php*/
+.fehlermeldung {
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.has-success #inputEmail2 {
+	border: 1px solid #17BC72;
+	color: #C7C9B9;
+}
+
+.has-error #inputEmail2 {
+	border: 1px solid #ff0000;
+	color: #C7C9B9;
+}
+
+.has-success #benutzername2 {
+	border: 1px solid #17BC72;
+	color: #C7C9B9;
+}
+
+.has-error #benutzername2 {
+	border: 1px solid #ff0000;
+	color: #C7C9B9;
+}
+
+.has-success #inputPassword4 {
+	border: 1px solid #17BC72;
+	color: #C7C9B9;
+}
+
+.has-error #inputPassword4 {
+	border: 1px solid #ff0000;
+	color: #C7C9B9;
+}
+
+.has-success #inputPassword5 {
+	border: 1px solid #17BC72;
+	color: #C7C9B9;
+}
+
+.has-error #inputPassword5 {
+	border: 1px solid #ff0000;
+	color: #C7C9B9;
+}
+
+.profil-daten {
+	margin: 50px 0 0 200px;
+	text-align: center;
+}
+
+.profil-löschen {
+	margin: 30px 0 20px 0;
+	text-align: center;
+}
+
+.ausloggen {
+	margin: 30px 0 20px 0;
+	text-align: center;
+}
+
+.new-register {
+	margin-top: 50px;
+} /*upload.php*/
+.upload {
+	margin-top: 30px;
+	margin-left: 150px;
+	margin-right: 150px;
+}
+
+.datei-select {
+	margin-left: 15px;
+}
+
+/*.freigabe {
+	margin: 0 0 100px 0;
+}
+
+.freigabe-feld {
+	float: left;
+}
+
+.freigabe-button {
+	margin: 30px 0 100px 300px;
+}
+*/
+.links {
+	float: left;
+}
+
+.rechts {
+	margin: 40px 0 100px 500px;
+}
+
+.titel-upload {
+	margin-bottom: 50px;
+	text-align: center;
+}
+
+/*register*/
+.has-success #inputEmail {
+	border: 1px solid #17BC72;
+	color: #C7C9B9;
+}
+
+.has-error #inputEmail {
+	border: 1px solid #ff0000;
+	color: #C7C9B9;
+}
+
+.has-success #benutzername {
+	border: 1px solid #17BC72;
+	color: #C7C9B9;
+}
+
+.has-error #benutzername {
+	border: 1px solid #ff0000;
+	color: #C7C9B9;
+}
+
+.has-success #inputPassword1 {
+	border: 1px solid #17BC72;
+	color: #C7C9B9;
+}
+
+.has-error #inputPassword1 {
+	border: 1px solid #ff0000;
+	color: #C7C9B9;
+}
+
+.has-success #inputPassword2 {
+	border: 1px solid #17BC72;
+	color: #C7C9B9;
+}
+
+.has-error #inputPassword2 {
+	border: 1px solid #ff0000;
+	color: #C7C9B9;
+}
+
+/*myFiles*/
+.beschreibung-lenght { !
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	max-width: 500px;
+}
+
+/*fonts*/
+h1 {
+	font-family: 'Droid Sans', sans-serif;
+	font-size: 55px;
+}
+
+h2 {
+	font-size: 35px;
+	margin-bottom: 20px;
+}
+
+h3 {
+	font-size: 15px;
+	color: #FF0000;
+}
+
+p {
+	margin: 0 150px 0 50px;
+}
+
+textarea {
+	resize: none;
+}
+
+footer {
+	margin-top: 40px;
+}
