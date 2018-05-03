@@ -9,12 +9,18 @@ class ConnectionHandler {
 		if (self::$connection === null) {
 			
 			// Konfigurationsdatei auslesen
+
+            /*TO DO NEUE KONFIGURATIONS DATEI
 			$config = require '../config.php';
 			$host = $config ['database'] ['host'];
 			$username = $config ['database'] ['username'];
 			$password = $config ['database'] ['password'];
 			$database = $config ['database'] ['database'];
-			
+			*/
+            $host = "localhost";
+            $username = "root";
+            $password = "";
+            $database = "test";
 			// Verbindung initialisieren
 			self::$connection = new MySQLi ( $host, $username, $password, $database );
 			if (self::$connection->connect_error) {
