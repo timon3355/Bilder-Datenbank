@@ -33,8 +33,5 @@
 	</div>
 </div>
 <div class="slogan">
-	<h2>Anonym</h2>
-	<h2>unlimited data volume</h2>
-	<h2>upload</h2>
-	<h2>download</h2>
+    <h1>"Hier könnte ihre Werbung stehen"</h1>
 </div>

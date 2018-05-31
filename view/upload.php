@@ -19,8 +19,7 @@ if ((isset ( $_SESSION ['loggedin'] ))) {
 		drücken Sie auf den Upload Button und Ihre Datei ist jetzt unter Meine
 		Dateien zu finden.</p>
 	<div class="upload">
-		<form class="form-horizontal" enctype="multipart/form-data"
-			action="/file/upload" method="POST">
+		<form class="form-horizontal" enctype="multipart/form-data" action="/file/upload" method="POST">
 			<div class="datei-select">
 				<div class="fehlermeldung">
 					<?php

@@ -22,7 +22,7 @@ class UserRepository extends Repository {
 	 */
 	public function isValidLogin($name, $password) {
 		$query = "SELECT name, passwort,id, email from $this->tableName where name = ? AND passwort = ?";
-		
+
 		$password = sha1 ( $password );
 		
 		$statement = ConnectionHandler::getConnection ()->prepare ( $query );
@@ -36,7 +36,7 @@ class UserRepository extends Repository {
 		if (! $result) {
 			throw new Exception ( $statement->error );
 		}
-		
+
 		if ($result->num_rows == 1) {
 			return $result->fetch_object ();
 		} else {
@@ -67,7 +67,7 @@ class UserRepository extends Repository {
 	 */
 	public function updateBenutzer($benutzername, $password, $email, $benutzernameold) {
 		$query = "UPDATE $this->tableName SET name = ?, passwort = ?, email = ? WHERE name = ?";
-		
+        $password = sha1 ( $password );
 		$statement = ConnectionHandler::getConnection ()->prepare ( $query );
 		$statement->bind_param ( 'ssss', $benutzername, $password, $email, $benutzernameold );
 		

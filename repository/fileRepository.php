@@ -2,11 +2,11 @@
 require_once '../lib/Repository.php';
 class FileRepository extends Repository {
 	protected $tableName = 'datei';
-	public function upload($name, $beschreibung, $datum, $oeffentlich, $groesse, $id) {
-		$query = "INSERT INTO $this->tableName (dateiname, beschreibung, datum, oeffentlich, groesse,benutzer_id) VALUES (?, ?, ?, ?, ?, ?)";
+	public function upload($beschreibung, $datum, $groesse) {
+		$query = "INSERT INTO $this->tableName ( beschreibung, datum, groesse,galerie_id,) VALUES (?, ?, ?, ?)";
 		
 		$statement = ConnectionHandler::getConnection ()->prepare ( $query );
-		$statement->bind_param ( 'sssiii', $name, $beschreibung, $datum, $oeffentlich, $groesse, $id );
+		$statement->bind_param ( 'sssiii', $name, $beschreibung, $datum, $oeffentlich, $groesse );
 		
 		if (! $statement->execute ()) {
 			throw new Exception ( $statement->error );
@@ -19,34 +19,6 @@ class FileRepository extends Repository {
 		// und die Parameter "binden"
 		$statement = ConnectionHandler::getConnection ()->prepare ( $query );
 		$statement->bind_param ( 's', $name );
-		// Das Statement absetzen
-		$statement->execute ();
-		
-		// Resultat der Abfrage holen
-		$result = $statement->get_result ();
-		if (! $result) {
-			throw new Exception ( $statement->error );
-		}
-		
-		// Ersten Datensatz aus dem Resultat holen
-		$rows = array ();
-		while ( $row = $result->fetch_object () ) {
-			$rows [] = $row;
-		}
-		
-		// Datenbankressourcen wieder freigeben
-		$result->close ();
-		
-		// Den gefundenen Datensatz zurückgeben
-		return $rows;
-	}
-	public function myFiles() {
-		$query = "select * from datei where benutzer_id = ?";
-		
-		// Datenbankverbindung anfordern und, das Query "preparen" (vorbereiten)
-		// und die Parameter "binden"
-		$statement = ConnectionHandler::getConnection ()->prepare ( $query );
-		$statement->bind_param ( 'i', $_SESSION ['id'] );
 		// Das Statement absetzen
 		$statement->execute ();
 		
@@ -91,6 +63,31 @@ class FileRepository extends Repository {
 			return false;
 		}
 	}
+	public function getImageByGalerieId($galerieID){
+
+	    $query= 'select * from datei where galerie_id = ?';
+        $statement = ConnectionHandler::getConnection ()->prepare ( $query );
+        $statement->bind_param ( 's', $galerieId );
+        $result = $statement->get_result ();
+        if (! $result) {
+            throw new Exception ( $statement->error );
+        }
+
+        // Ersten Datensatz aus dem Resultat holen
+        $rows = array ();
+        while ( $row = $result->fetch_object () ) {
+            $rows [] = $row;
+        }
+
+        // Datenbankressourcen wieder freigeben
+        $result->close ();
+
+        // Den gefundenen Datensatz zurückgeben
+        return $rows;
+
+
+
+    }
 }
 	
 	

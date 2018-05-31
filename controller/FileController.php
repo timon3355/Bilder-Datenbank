@@ -23,6 +23,17 @@ class FileController {
 		$view->title = 'Meine Dateien';
 		$view->display ();
 	}
+    public function createGalerie() {
+        $view = new View ( 'createGalerie' );
+        $view->title = 'Galerie erstellen';
+        $view->display ();
+    }
+    public function galerie($name) {
+        $view = new View ( 'Galerie' );
+        $view->message = $name;
+        $view->title = 'Galerie verändern';
+        $view->display ();
+    }
 	/*
 	 * Es wird nach einer Datei gesucht mit dem Gleichen Namen wie der Suchbegriff.
 	 */
@@ -80,31 +91,57 @@ class FileController {
 	/*
 	 * Eintrag in DB wird erstellt, datei in "files"-Verzeichnis verschoben.
 	 */
+
+    public function newGalerie(){
+        require_once '../repository/galerieRepository.php';
+        $gRepo = new GalerieRepository ();
+        // TESTEN OB ES GALERIE SCHON GIBT!!!!!!!!
+        $name=$_POST['name'];
+        $beschreibung=$_POST['beschreibung'];
+        $benutzer_id=$_SESSION['id'];
+
+        date_default_timezone_set ( 'Europe/Zurich' );
+        // heutiges Datum
+
+        $today = date ( 'd/m/Y' );
+
+        $gRepo->createGalerie($name, $benutzer_id, $beschreibung, $today, "");
+
+
+        header ( 'Location:/file/myFile' );
+    }
+
+	//WEITERMACHEN
 	public function upload() {
 		require_once '../repository/FileRepository.php';
+		require_once '../repository/galerieRepository.php';
 		$fileRepo = new FileRepository ();
-		// testen ob die Datei für jeden öffentlich sein soll.
-		if (isset ( $_POST ['public'] )) {
-			$public = 1;
-		} else {
-			$public = 0;
-		}
+        $gRepo = new GalerieRepository();
 		$time = time ();
 		// Zeit zone setzen
+
 		date_default_timezone_set ( 'Europe/Zurich' );
 		// heutiges Datum
+
 		$today = date ( 'd/m/Y' );
+
+
+
+
 		// testen ob ein Datei zum hochladen ausgewählt ist.
 		if (! file_exists ( $_FILES ['userfile'] ['tmp_name'] ) || ! is_uploaded_file ( $_FILES ['userfile'] ['tmp_name'] )) {
-			$message = 'Sie müssen eine Datei zum hochladen auswählen.';
-			$view = new View ( 'upload' );
-			$view->title = 'Datei hochladen';
+			$message = $_POST['galerieName'];
+
+			$view = new View ( 'Galerie' );
+			$view->title = 'galerie X';
 			$view->message = $message;
 			$view->display ();
-		} else {
-			$id = $_SESSION ['id'];
+		}
+
+		else {
+			$galerieId = $gRepo->getGalerieIdByName($_POST['galerieName']);// galerie id
 			$size = $_FILES ['userfile'] ['size'];
-			
+
 			$name = $_FILES ['userfile'] ['name'];
 			// testen ob Namen der Datei valid ist.
 			$regexName = preg_match ( '/^[A-Za-z0-9-?\_%+.]{2,50}$/', $name );
@@ -113,10 +150,15 @@ class FileController {
 			if ($regexName) {
 				$path = getcwd() . "/files/";
 				try {
+
+
+
 					$tmpName = $_FILES ['userfile'] ['tmp_name'];
 					$beschreibung = $_POST ['beschreibung'];
-					$fileRepo->upload ( $name, $beschreibung, $today, $public, $size, $id );
-					$result = $fileRepo->clearId ( $name, $beschreibung, $today, $public, $size, $id );
+					$fileRepo->upload ( $beschreibung, $today, $size, $galerieId );  //dateipfad, beschreibung, datum, groesse,galerie_id, schlüssel
+
+					$result = $fileRepo->clearId ( $name, $beschreibung, $today, $size );
+
 					// mache aus dem Dateiname und id in DB einen "eindeutigen-einmahligen" Namen.
 					$temp = explode ( ".", $_FILES ["userfile"] ["name"] );
 					$newfilename = $result->id . '.' . end ( $temp );

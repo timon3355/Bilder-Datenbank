@@ -25,6 +25,7 @@
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <script src="/public/js/modal.js"></script>
     <![endif]-->
 </head>
 <body>
@@ -67,14 +68,14 @@
 							echo (' class="active"');
 						}
 						
-						?>><a href="/File/myFile">Meine Dateien</a></li>
+						?>><a href="/File/myFile">Meine galerien</a></li>
 					<li
 						<?php
 						if (View::$activePage == "Fileuploadsite") {
 							echo ('class="active"');
 						}
 						
-						?>><a href="/File/uploadsite">Datei hochladen</a></li>
+						?>><a href="/File/uploadsite">wird nicht gebraucht</a></li>
 					<li
 						<?php
 						if (View::$activePage == "Userprofile") {
@@ -89,6 +90,8 @@
 						}
 						
 						?>><a href="/Default/imprint">Impressum</a></li>
+                    <li
+
 
 				</ul>
 			</div>

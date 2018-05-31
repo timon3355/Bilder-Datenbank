@@ -36,7 +36,7 @@ class LoginController {
 	 * Funktion um sich auszuloggen
 	 */
 	public function destroy() {
-		session_unset ( $_SESSION ['name'] );
+		session_unset ( $_SESSION );
 		session_destroy ();
 		
 		header ( "Location: /user" );

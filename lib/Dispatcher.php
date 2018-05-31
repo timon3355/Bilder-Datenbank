@@ -44,6 +44,7 @@ class Dispatcher {
 		$method = 'index';
 		if (! empty ( $uriFragments [1] )) {
 			$method = $uriFragments [1];
+
 		}
 		//setzen, welche Seite genau ausgewählt ist.
 		View::$activePage = View::$activePage . $method;
@@ -55,6 +56,12 @@ class Dispatcher {
 		// Eine neue Instanz des Controllers wird erstellt und die gewünschte
 		// Methode darauf aufgerufen.
 		$controller = new $controllerName ();
+
+        if(! empty($uriFragments [2])){
+
+            $controller->$method ($uriFragments[2]);
+            }
+        else{
 		$controller->$method ();
-	}
+	}}
 }
