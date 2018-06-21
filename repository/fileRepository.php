@@ -6,7 +6,7 @@ class FileRepository extends Repository {
 		$query = 'INSERT INTO datei ( beschreibung, name, datum, groesse, galerie_id) VALUES (?, ?, ?, ?,?)';
 
 		$statement = ConnectionHandler::getConnection ()->prepare ( $query );
-		$statement->bind_param ( 'sssii',  $beschreibung, $name, $datum, $groesse, $galerie_id );
+		$statement->bind_param ( 'sssii',  htmlspecialchars ($beschreibung), htmlspecialchars ($name), $datum, $groesse, $galerie_id );
 		
 		if (! $statement->execute ()) {
 			throw new Exception ( $statement->error );
@@ -15,7 +15,7 @@ class FileRepository extends Repository {
     public function changeImage( $name, $beschreibung, $id){
         $query = 'UPDATE datei set name = ?, beschreibung = ? where id = ?';
         $statement = ConnectionHandler::getConnection ()->prepare ( $query );
-        $statement->bind_param ( 'ssi', $name, $beschreibung, $id );
+        $statement->bind_param ( 'ssi', htmlspecialchars ($name), htmlspecialchars ($beschreibung), $id );
 
         if (! $statement->execute ()) {
             throw new Exception ( $statement->error );

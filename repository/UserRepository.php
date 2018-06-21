@@ -11,7 +11,7 @@ class UserRepository extends Repository {
 		$query = "INSERT INTO $this->tableName (name, passwort, email) VALUES (?, ?, ?)";
 		
 		$statement = ConnectionHandler::getConnection ()->prepare ( $query );
-		$statement->bind_param ( 'sss', $benutzername, $password, $email );
+		$statement->bind_param ( 'sss', htmlspecialchars ($benutzername), htmlspecialchars ($password), htmlspecialchars ($email) );
 		
 		if (! $statement->execute ()) {
 			throw new Exception ( $statement->error );
@@ -69,7 +69,7 @@ class UserRepository extends Repository {
 		$query = "UPDATE $this->tableName SET name = ?, passwort = ?, email = ? WHERE name = ?";
         $password = sha1 ( $password );
 		$statement = ConnectionHandler::getConnection ()->prepare ( $query );
-		$statement->bind_param ( 'ssss', $benutzername, $password, $email, $benutzernameold );
+		$statement->bind_param ( 'ssss', htmlspecialchars ($benutzername), htmlspecialchars ($password), htmlspecialchars ($email), $benutzernameold );
 		
 		if (! $statement->execute ()) {
 			throw new Exception ( $statement->error );

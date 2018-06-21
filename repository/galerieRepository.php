@@ -8,7 +8,7 @@ class GalerieRepository extends Repository
             $query = "INSERT INTO $this->tableName ( name, benutzer_id, beschreibung, datum, thumbnail) VALUES (?, ?, ?, ?, ?)";
 
             $statement = ConnectionHandler::getConnection ()->prepare ( $query );
-            $statement->bind_param ( 'sisis', $name, $benutzer_id, $beschreibung, $datum, $thumbnail);
+            $statement->bind_param ( 'sisis', htmlspecialchars ($name), $benutzer_id, htmlspecialchars ($beschreibung), $datum, htmlspecialchars ($thumbnail));
 
             if (! $statement->execute ()) {
                 throw new Exception ( $statement->error );
@@ -119,7 +119,7 @@ class GalerieRepository extends Repository
     public function updateGalerie($name,$beschreibung, $id){
         $query = "UPDATE `galerie` SET name = ?, beschreibung = ? WHERE id = ?";
         $statement = ConnectionHandler::getConnection ()->prepare ( $query );
-        $statement->bind_param ( 'ssi', $name, $beschreibung, $id );
+        $statement->bind_param ( 'ssi', htmlspecialchars ($name), htmlspecialchars ($beschreibung), $id );
 
         if (! $statement->execute ()) {
             throw new Exception ( $statement->error );
