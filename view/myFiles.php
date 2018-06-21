@@ -40,7 +40,7 @@ if ((isset ( $_SESSION ['loggedin'] ))) {
 	foreach ( $result as $row ) {
 		
 		echo "<div    >
-                <a href='/file/galerie/$row->name'>$row->name</a>
+                <a href='/file/galerie/".urlencode($row->name)."'>$row->name</a>
                 
 
 

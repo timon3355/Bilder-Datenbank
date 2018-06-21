@@ -21,13 +21,13 @@ class GalerieRepository extends Repository
 
             // MACHEN DASS NUR SOLCHE MIT DEM ANGEMELDETENE USER RAUS GESUCHT WERDEN.
 
-            $query = "select id from `galerie` where name = ?";
+        $query = "select id from `galerie` where name = ?";
 
 
         $statement = ConnectionHandler::getConnection ()->prepare ( $query );
 
         $statement->bind_param ( 's', $galerieName);
-        var_dump(($query));
+        $statement->execute();
         $result= $statement->get_result ();
 
         if (! $result) {
@@ -49,6 +49,17 @@ class GalerieRepository extends Repository
 
 
 
+    }
+    public function deleteById($id)
+    {
+        $query = "DELETE FROM galerie WHERE id = ?";
+
+        $statement = ConnectionHandler::getConnection()->prepare($query);
+        $statement->bind_param('i', $id);
+
+        if (!$statement->execute()) {
+            throw new Exception ($statement->error);
+        }
     }
     public function myGalerie() {
         $query = "select * from $this->tableName where benutzer_id = ?";
@@ -78,5 +89,42 @@ class GalerieRepository extends Repository
         // Den gefundenen Datensatz zurückgeben
         return $rows;
     }
+    public function getGalerieById($id){
+        $query = "select * from `galerie` where id = ?";
+        $statement = ConnectionHandler::getConnection ()->prepare ( $query );
+        $statement->bind_param ( 'i', $id );
+        $statement->execute ();
+        $result = $statement->get_result ();
+        if (! $result) {
+            throw new Exception ( $statement->error );
+        }
+
+        // Ersten Datensatz aus dem Resultat holen
+
+        $rows = array ();
+        while ( $row = $result->fetch_object () ) {
+            $rows [] = $row;
+        }
+
+
+        // Datenbankressourcen wieder freigeben
+
+        $result->close ();
+
+        // Den gefundenen Datensatz zurückgeben
+        return $rows;
+
+
+    }
+    public function updateGalerie($name,$beschreibung, $id){
+        $query = "UPDATE `galerie` SET name = ?, beschreibung = ? WHERE id = ?";
+        $statement = ConnectionHandler::getConnection ()->prepare ( $query );
+        $statement->bind_param ( 'ssi', $name, $beschreibung, $id );
+
+        if (! $statement->execute ()) {
+            throw new Exception ( $statement->error );
+        }
+    }
+
     }
 ?>
